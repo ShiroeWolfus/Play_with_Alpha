@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Maze</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1> Chocobo's Maze</h1>
+    <img src="alpha.png" id="chocobo"/>
+    <script>
+        let socket = io();
+        
+        let posX = 0;
+        let posY = 0;
+        let move = 150 ;
+        
+        socket.on('chocoboDown', () => {
+            console.log('Descend mon Chocobo !') ;
+            posY += move ;
+            chocobo.style.top = posY + "px";
+        })
+        socket.on('chocoboUp', () => {
+            console.log('Monte mon Chocobo !') ;
+            posY -= move ;
+            chocobo.style.top = posY + "px";
+        })
+        socket.on('chocoboRight', () => {
+            console.log('A droite toute, mon Chocobo !') ;
+            posX += move ;
+            chocobo.style.left = posX + "px";
+        })
+        socket.on('chocoboLeft', () => {
+            console.log('Allons à gauche, mon Chocobo !') ;
+            posX -= move ;
+            chocobo.style.left = posX + "px";
+        })
+    </script>
+    <style>
+        img{
+            height: 20vh;
+            width: 15vw;
+            position: absolute;
+        }
+    </style>
+</body>
+</html>
